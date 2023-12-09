@@ -23,15 +23,12 @@ function setGameState() {
 
 // function to get local storage
 function loadGameState() {
-  const savedGameState = localStorage.getItem("gameState");
-  if (savedGameState) {
-    const gameState = JSON.parse(savedGameState);
-    cookiesValue = gameState.cookiesValue;
-    playTimeValue = gameState.playTimeValue;
-    clickerUpgradeCost = gameState.clickerUpgradeCost;
-    cookiesperClick = gameState.cookiesperClick;
-    autoclickerValue = gameState.autoclickerValue;
-  }
+  const gameState = JSON.parse(localStorage.getItem("gameState"));
+  cookiesValue = gameState.cookiesValue;
+  playTimeValue = gameState.playTimeValue;
+  clickerUpgradeCost = gameState.clickerUpgradeCost;
+  cookiesperClick = gameState.cookiesperClick;
+  autoclickerValue = gameState.autoclickerValue;
 }
 
 // regarding to clicker upgrades
@@ -55,7 +52,6 @@ myAutoClickerButton.addEventListener("click", function () {
   autoclickerValue++;
   let sum = cost * 3;
   cost = sum;
-  cookiesValue -= 100;
 });
 
 setInterval(() => {
@@ -99,7 +95,6 @@ myResetButton.addEventListener("click", function () {
   cookiesValue = 0;
   autoclickerValue = 0;
   playTimeValue = 0;
-  cookiesperClick = 0;
 });
 
 // loads the game state
