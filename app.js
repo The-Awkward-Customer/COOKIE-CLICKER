@@ -1,10 +1,14 @@
 console.log("COOKIE-CLICKER");
 
-//DECLARES THE MYCOOKIES VARIABLES
+//GAMESTATE OBJECT
 let cookieClickerData = {
-  myCookieTimer: 1000,
+  myCookieTimer: 500,
   myCookiesValue: 0,
+  autoClickerUpgradeCost: 10,
 };
+
+// //Global Upgrade varables
+// let autoClickerUpgradeCost = 10;
 
 console.log(cookieClickerData.myCookiesValue);
 
@@ -26,8 +30,65 @@ setInterval(function () {
   myCookieValueIs.textContent = `The cookie value is " + ${cookieClickerData.myCookiesValue}`;
   const stringifiedCookieClickerData = JSON.stringify(cookieClickerData); //Stores and retreived a data object from local Storage
   localStorage.setItem("data", stringifiedCookieClickerData);
-  console.log(cookieClickerData.myCookiesValue);
+  console.log(
+    `the current cookie value is ${cookieClickerData.myCookiesValue}`
+  );
+  myUpgradeHandler();
 }, cookieClickerData.myCookieTimer);
+
+// handles upgrades
+
+let myUpgradeButton = document.getElementById("myUpgradeButton");
+
+function myUpgradeHandler() {
+  if (
+    cookieClickerData.myCookiesValue < cookieClickerData.autoClickerUpgradeCost
+  ) {
+    myUpgradeButton.disabled = true;
+    console.log("you do not have enough");
+  } else {
+    myUpgradeButton.disabled = false;
+    console.log("you have enough");
+  }
+}
+
+// WORKS
+// function autoclicker() {
+//   console.log("called");
+//   if (cookieClickerData.myCookiesValue >= autoClickerUpgradeCost) {
+//     cookieClickerData.myCookiesValue -= autoClickerUpgradeCost;
+//     console.log("you paid " + autoClickerUpgradeCost);
+//     autoClickerUpgradeCost = autoClickerUpgradeCost * 3;
+//     console.log(autoClickerUpgradeCost);
+
+//     setInterval(() => {
+//       cookieClickerData.myCookiesValue++;
+//       console.log(`Current cookies: ${cookieClickerData.myCookiesValue}`);
+//     }, 1000);
+//   }
+// }
+
+//FAILS TO EXECUTE IF STATEMENT
+function autoclicker() {
+  console.log("called");
+  if (
+    `${cookieClickerData.myCookiesValue} >= ${cookieClickerData.autoClickerUpgradeCost}`
+  ) {
+    cookieClickerData.myCookiesValue -=
+      cookieClickerData.autoClickerUpgradeCost;
+    console.log(`you paid ${cookieClickerData.autoClickerUpgradeCost}`);
+    cookieClickerData.autoClickerUpgradeCost =
+      cookieClickerData.autoClickerUpgradeCost * 3;
+    console.log(`the cost is ${cookieClickerData.autoClickerUpgradeCost}`);
+
+    setInterval(() => {
+      cookieClickerData.myCookiesValue++;
+      console.log(`Current cookies: ${cookieClickerData.myCookiesValue}`);
+    }, 1000);
+  }
+}
+
+myUpgradeButton.addEventListener("click", autoclicker);
 
 // Retrieves local data and sets the current values
 function onPageLoad() {
@@ -38,6 +99,13 @@ function onPageLoad() {
 }
 
 onPageLoad();
+
+// reset functions
+
+function resetValue() {
+  cookieClickerData.myCookiesValue = 0;
+  localStorage.clear();
+}
 
 //_______________________________________________________________
 //___________________
