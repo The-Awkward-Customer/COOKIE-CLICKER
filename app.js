@@ -1,155 +1,94 @@
-console.log("COOKIE-CLICKER");
+console.log("Click some cookies!!");
+// Global Content
 
-//GAMESTATE OBJECT
-let cookieClickerData = {
-  myCookieTimer: 500,
-  myCookiesValue: 0,
-  autoClickerUpgradeCost: 10,
-};
+//global variable
+let cookiesValue = 1;
+let playTimeValue = 0;
+let cost = 10;
+let autoclickerValue = 0;
 
-// //Global Upgrade varables
-// let autoClickerUpgradeCost = 10;
-
-console.log(cookieClickerData.myCookiesValue);
-
-//Get the myCookieValueIs elements by id
-myCookieValueIs = document.getElementById("myCookieValueIs");
-console.log(myCookieValueIs);
-
-// HANDLES CLICKS ON MYCOOKIEBUTTON
-const myCookieButton = document.getElementById("myCookieButton");
-console.log(myCookieButton);
-
-myCookieButton.addEventListener("click", function () {
-  cookieClickerData.myCookiesValue++;
-});
-
-// Checks the value of myCookieValue each second
-
-setInterval(function () {
-  myCookieValueIs.textContent = `The cookie value is " + ${cookieClickerData.myCookiesValue}`;
-  const stringifiedCookieClickerData = JSON.stringify(cookieClickerData); //Stores and retreived a data object from local Storage
-  localStorage.setItem("data", stringifiedCookieClickerData);
-  console.log(
-    `the current cookie value is ${cookieClickerData.myCookiesValue}`
-  );
-  myUpgradeHandler();
-}, cookieClickerData.myCookieTimer);
-
-// handles upgrades
-
-let myUpgradeButton = document.getElementById("myUpgradeButton");
-
-function myUpgradeHandler() {
-  if (
-    cookieClickerData.myCookiesValue < cookieClickerData.autoClickerUpgradeCost
-  ) {
-    myUpgradeButton.disabled = true;
-    console.log("you do not have enough");
-  } else {
-    myUpgradeButton.disabled = false;
-    console.log("you have enough");
-  }
+// a function to declare an object and update local storage
+// stringyfies the object
+function setGameState() {
+  gameState = {
+    cookiesValue: cookiesValue,
+    playTimeValue: playTimeValue,
+    clickerUpgradeCost: clickerUpgradeCost,
+    autoclickerValue: autoclickerValue,
+  };
+  localStorage.setItem("gameState", JSON.stringify(gameState));
 }
 
-// WORKS
-// function autoclicker() {
-//   console.log("called");
-//   if (cookieClickerData.myCookiesValue >= autoClickerUpgradeCost) {
-//     cookieClickerData.myCookiesValue -= autoClickerUpgradeCost;
-//     console.log("you paid " + autoClickerUpgradeCost);
-//     autoClickerUpgradeCost = autoClickerUpgradeCost * 3;
-//     console.log(autoClickerUpgradeCost);
+// function to get local storage
+function loadGameState() {
+  const gameState = JSON.parse(localStorage.getItem("gameState"));
+  cookiesValue = gameState.cookiesValue;
+  playTimeValue = gameState.playTimeValue;
+  clickerUpgradeCost = gameState.clickerUpgradeCost;
+  autoclickerValue = gameState.autoclickerValue;
+}
 
-//     setInterval(() => {
-//       cookieClickerData.myCookiesValue++;
-//       console.log(`Current cookies: ${cookieClickerData.myCookiesValue}`);
-//     }, 1000);
+// regarding to clicker upgrades
+const myUpgradeButton = document.getElementById("myUpgradeButton");
+
+// function clickerUpgrades() {
+//   if (cookiesValue < clickerUpgradeCost) {
+//     myUpgradeButton.disbled = true;
+//   } else {
+//     myUpgradeButton.disbled = false;
 //   }
 // }
 
-//FAILS TO EXECUTE IF STATEMENT
-function autoclicker() {
-  console.log("called");
-  if (
-    `${cookieClickerData.myCookiesValue} >= ${cookieClickerData.autoClickerUpgradeCost}`
-  ) {
-    cookieClickerData.myCookiesValue -=
-      cookieClickerData.autoClickerUpgradeCost;
-    console.log(`you paid ${cookieClickerData.autoClickerUpgradeCost}`);
-    cookieClickerData.autoClickerUpgradeCost =
-      cookieClickerData.autoClickerUpgradeCost * 3;
-    console.log(`the cost is ${cookieClickerData.autoClickerUpgradeCost}`);
+// function to automate cookie value
+const myAutoClickerButton = document.getElementById("myAutoClickerButton");
+myAutoClickerButton.addEventListener("click", function () {
+  autoclickerValue++;
+  let sum = cost * 3;
+  cost = sum;
+});
 
-    setInterval(() => {
-      cookieClickerData.myCookiesValue++;
-      console.log(`Current cookies: ${cookieClickerData.myCookiesValue}`);
-    }, 1000);
-  }
+setInterval(() => {
+  let sum = cookiesValue + autoclickerValue;
+  cookiesValue = sum;
+}, 1000);
+
+// regarding cookie button
+const myCookieButton = document.getElementById("myCookieButton");
+myCookieButton.textContent = "Buy a Cookie";
+myCookieButton.addEventListener("click", clicked);
+
+function clicked() {
+  cookiesValue++;
 }
 
-myUpgradeButton.addEventListener("click", autoclicker);
-
-// Retrieves local data and sets the current values
-function onPageLoad() {
-  const retrievedLocalData = localStorage.getItem("data"); // get the data
-  parsedLocalData = JSON.parse(retrievedLocalData); // parse the data
-  console.log(parsedLocalData.myCookiesValue); //print the data
-  cookieClickerData = parsedLocalData; // set the data
+// function to log time played
+function playTimeCounter() {
+  setInterval(() => {
+    playTimeValue++;
+    console.log(`play time = ${playTimeValue}`);
+  }, 1000);
 }
 
-onPageLoad();
+// regarding updating DOM Elements
+const myCookieValueIs = document.getElementById("myCookieValueIs");
+const myPlayTime = document.getElementById("myPlaytime");
+const myCookiesPerSecond = document.getElementById("myCookiePerSecond");
+setInterval(() => {
+  myCookieValueIs.textContent = `You have ${cookiesValue} cookies`;
+  myPlayTime.textContent = `you have played for ${playTimeValue} seconds`;
+  myCookiesPerSecond.textContent = `baking ${autoclickerValue} per second`;
+  myAutoClickerButton.textContent = `Buy Autoclicker for ${cost}`;
+}, 10);
 
-// reset functions
+// resets the game
+const myResetButton = document.getElementById("myResetButton");
+myResetButton.textContent = "reset";
+myResetButton.addEventListener("click", function () {
+  cookiesValue = 0;
+  autoclickerValue = 0;
+  playTimeValue = 0;
+});
 
-function resetValue() {
-  cookieClickerData.myCookiesValue = 0;
-  localStorage.clear();
-}
-
-//_______________________________________________________________
-//___________________
-// LOCAL STORAGE DEMO
-
-// let counter = 0;
-
-// function addOne() {
-//   counter++;
-//   localStorage.setItem("counterValue", counter);
-//   console.log(localStorage.getItem("counterValue"));
-// }
-
-// addOne();
-
-// function onPageLoad() {
-//   const localCounter = localStorage.getItem("counterValue");
-//   counter = localCounter;
-//   package.textContent = counter;
-// }
-
-// onPageload();
-
-// const data = {
-//   likes: 0,
-//   dislikes: 0,
-// };
-
-// function addOneExample (type){
-//     //data[type]++
-// // check with type is passed
-// if(type = ===){
-//     do thing
-// }if else(type === ){
-
-// }
-// // increase that type in my data
-// //change number of the screen
-// //add to local storage
-
-// const stringifiedData= JSON.stringify(object)
-// localStorage.setItem("data", stringifiedData)
-// }
-
-// const localData = localStorage.getItem("data")
-// data = JSON.parse(localData)
-// addOneLike();
+// loads the game state
+playTimeCounter();
+loadGameState();
