@@ -3,18 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>THE COOKIE-NOMSTERS</title>
     <link rel="stylesheet" href="style.css" />
     <script src="./app.js" defer></script>
   </head>
   <body>
-    <h1>COOKIE-CLICKER</h1>
-    <p id="myCookieValueIs"></p>
-    <p id="myPlaytime"></p>
-    <p id="myCookiePerSecond"></p>
-    <button id="myCookieButton"></button>
-    <button id="myUpgradeButton">buy and upgrade</button>
-    <button id="myAutoClickerButton"></button>
-    <button id="myResetButton"></button>
+    <section class="layout">
+      <!-- header -->
+      <section class="itemHeader">
+        <button class="ghostBtn">
+          <img src="./assets/icons/icon-share.svg" />
+        </button>
+        <h1>THE COOKIE NOMSTERS</h1>
+        <button id="myResetButton" class="ghostBtn">
+          <img src="./assets/icons/icon-reset.svg" />
+        </button>
+      </section>
+      <!-- main -->
+      <section class="itemMain">
+        <!-- stats -->
+        <div class="statWrapper">
+          <div class="stat">
+            <img src="./assets/icons/icon-cookie.svg" />
+            <p id="myCookieValueIs"></p>
+          </div>
+          <div class="stat">
+            <img src="./assets/icons/icon-hangry.svg" />
+            <p id="myPlaytime"></p>
+          </div>
+        </div>
+        <!-- cookieClickerBtn -->
+        <button id="myCookieButton" class="myCookieBtn">
+          <img src="./assets/nomsters/Nomster.svg" />
+        </button>
+      </section>
+      <!-- footer -->
+      <section class="itemFooter">
+        <button id="myAutoClickerButton">
+          <div>
+            <p>Brown Egg</p>
+            <p>+1cps</p>
+          </div>
+          <img src="./assets/icons/icon-egg.svg" alt="An image of an Egg" />
+        </button>
+        <button id="myUpgradeButton">
+          <div>
+            <p>Pink Shrimp</p>
+            <p>+1cps</p>
+          </div>
+          <img
+            src="./assets/icons/icon-shrimp.svg"
+            alt="An image of a Shrimp"
+          />
+        </button>
+      </section>
+    </section>
   </body>
 </html>

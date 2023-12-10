@@ -14,7 +14,7 @@ function setGameState() {
   gameState = {
     cookiesValue: cookiesValue,
     playTimeValue: playTimeValue,
-    clickerUpgradeCost: clickerUpgradeCost,
+    cost: cost,
     autoclickerValue: autoclickerValue,
     cookiesperClick: cookiesperClick,
   };
@@ -28,7 +28,7 @@ function loadGameState() {
     const gameState = JSON.parse(savedGameState);
     cookiesValue = gameState.cookiesValue;
     playTimeValue = gameState.playTimeValue;
-    clickerUpgradeCost = gameState.clickerUpgradeCost;
+    cost = gameState.cost;
     cookiesperClick = gameState.cookiesperClick;
     autoclickerValue = gameState.autoclickerValue;
   }
@@ -76,7 +76,6 @@ setInterval(function () {
 
 // regarding cookie button
 const myCookieButton = document.getElementById("myCookieButton");
-myCookieButton.textContent = "Buy a Cookie";
 myCookieButton.addEventListener("click", function () {
   let sum = cookiesValue + cookiesperClick;
   cookiesValue = sum;
@@ -97,16 +96,16 @@ const myCookiesPerSecond = document.getElementById("myCookiePerSecond");
 setInterval(() => {
   myCookieValueIs.textContent = `You have ${cookiesValue} cookies`;
   myPlayTime.textContent = `you have played for ${playTimeValue} seconds`;
-  myCookiesPerSecond.textContent = `baking ${autoclickerValue} per second`;
+  // myCookiesPerSecond.textContent = `baking ${autoclickerValue} per second`;
   myAutoClickerButton.textContent = `Buy Autoclicker for ${cost}`;
-  myCookieButton.textContent = `+ ${cookiesperClick}`;
+  // myCookieButton.textContent = `+ ${cookiesperClick}`;
   setGameState();
 }, 10);
 
 // resets the game
 const myResetButton = document.getElementById("myResetButton");
-myResetButton.textContent = "reset";
 myResetButton.addEventListener("click", function () {
+  localStorage.clear("gameState");
   cookiesValue = 0;
   autoclickerValue = 0;
   playTimeValue = 0;
