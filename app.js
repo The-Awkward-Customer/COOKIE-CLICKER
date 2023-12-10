@@ -2,11 +2,11 @@ console.log("Click some cookies!!");
 // Global Content
 
 //global variable
-let cookiesValue = 1;
+let cookiesValue = 0;
 let playTimeValue = 0;
 let cost = 10;
 let autoclickerValue = 0;
-let cookiesperClick = 0;
+let cookiesperClick = 1;
 
 // a function to declare an object and update local storage
 // stringyfies the object
@@ -41,27 +41,38 @@ myUpgradeButton.addEventListener("click", function () {
   console.log(`the cookies per click is ${cookiesperClick}`);
 });
 
-// function clickerUpgrades() {
-//   if (cookiesValue < clickerUpgradeCost) {
-//     myUpgradeButton.disbled = true;
-//   } else {
-//     myUpgradeButton.disbled = false;
-//   }
-// }
+// regarding the availability of upgrades
+
+setInterval(function () {
+  if (cookiesValue < cost) {
+    myAutoClickerButton.disabled = true;
+  } else {
+    myAutoClickerButton.disabled = false;
+  }
+}, 10);
 
 // function to automate cookie value
 const myAutoClickerButton = document.getElementById("myAutoClickerButton");
 myAutoClickerButton.addEventListener("click", function () {
   autoclickerValue++;
+  let sum2 = cookiesValue - cost;
+  cookiesValue = sum2;
   let sum = cost * 3;
   cost = sum;
-  cookiesValue -= 100;
 });
 
 setInterval(() => {
   let sum = cookiesValue + autoclickerValue;
   cookiesValue = sum;
 }, 1000);
+
+//stops negative value
+
+setInterval(function () {
+  if (cookiesValue < 0) {
+    cookiesValue = 0;
+  }
+}, 10);
 
 // regarding cookie button
 const myCookieButton = document.getElementById("myCookieButton");
@@ -99,7 +110,8 @@ myResetButton.addEventListener("click", function () {
   cookiesValue = 0;
   autoclickerValue = 0;
   playTimeValue = 0;
-  cookiesperClick = 0;
+  cookiesperClick = 1;
+  cost = 10;
 });
 
 // loads the game state
