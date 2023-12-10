@@ -8,8 +8,14 @@
   --red: #ff5a5a;
   --white: white;
   --white-transparent: #ffffff3f;
+
+  /* button specific */
   --ghost-btn-bg-enabled: #ffffff00;
-  --ghost-button-bg-hover: #00000014;
+  --ghost-btn-bg-hover: #00000014;
+  --upgrade-btn-padding: 12px 20px 12px 12px;
+  --upgrade-btn-shadow: 0px 4px 8px 0px rgba(250, 162, 0, 0.4);
+
+  /* raduis */
   --radius-round: 999px;
 
   /* curves */
@@ -17,6 +23,9 @@
   --bezier-cp1-y: 0.67;
   --bezier-cp2-x: 0.83;
   --bezier-cp2-y: 0.67;
+
+  /* badges */
+  --badge-padding: 2px 6px;
 }
 
 @font-face {
@@ -65,7 +74,7 @@ body {
   transition: transform 0.1s ease-in-out;
 }
 .ghostBtn:hover {
-  background-color: var(--ghost-button-bg-hover);
+  background-color: var(--ghost-btn-bg-hover);
 }
 
 .ghostBtn:active {
@@ -76,6 +85,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+  scale: 2;
   transition: transform 0.15s
     cubic-bezier(
       var(--bezier-cp1-x),
@@ -90,6 +100,56 @@ body {
 
 .myCookieBtn:active {
   transform: scale(0.95);
+}
+
+/* upgrade Button */
+.UpgradeButton {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 4px;
+  padding: var(--upgrade-btn-padding);
+  border-radius: var(--radius-round);
+  border: none;
+  background-color: var(--white);
+  box-shadow: var(--upgrade-btn-shadow);
+}
+
+.UpgradeButton img {
+  width: 32px;
+  height: 32px;
+}
+
+.UpgradeButton .content h3 {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  font-weight: medium;
+  font-size: 16px;
+  line-height: 18px;
+}
+.UpgradeButton .subcopy {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.UpgradeButton .badge {
+  display: flex;
+  position: absolute;
+  padding-right: 5px;
+  background-color: var(--bg-strongYellow);
+  border: var(--white);
+  border-radius: var(--radius-round);
+  padding: var(--badge-padding);
+  color: var(--fg-onyellow);
+}
+
+.UpgradeButton:hover {
+}
+
+.UpgradeButton:active {
 }
 
 /* stats */
@@ -131,17 +191,47 @@ body {
 
 .itemMain {
   grid-area: main;
+  display: flex;
+  flex-flow: column nowrap;
   height: 100%;
 }
+.buttonWrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  flex-grow: 1;
+  background-image: url(./assets/);
+}
+
 .itemFooter {
   grid-area: footer;
-  background-color: lavender;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+.itemFooter .contentWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.itemFooter img {
+  height: 24px;
+}
+
+.itemFooter section {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 12px;
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 48px 1fr 48px;
+  grid-template-rows: 48px 1fr 56px;
   grid-template-areas:
     "header"
     "main"
