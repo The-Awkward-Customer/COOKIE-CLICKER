@@ -93,13 +93,13 @@ function playTimeCounter() {
 const myCookieValueIs = document.getElementById("myCookieValueIs");
 const myPlayTime = document.getElementById("myPlaytime");
 const myCookiesPerSecond = document.getElementById("myCookiePerSecond");
-const autoClickerCost = document.getElementById("autoClickerCost");
+const myCookiesPerClick = document.getElementById("myCookiesPerClick");
 setInterval(() => {
   myCookieValueIs.textContent = `You have ${cookiesValue} cookies`;
   myPlayTime.textContent = `you have played for ${playTimeValue} seconds`;
   // myCookiesPerSecond.textContent = `baking ${autoclickerValue} per second`;
-  autoClickerCost.textContent = `${cost}`;
-  // myCookieButton.textContent = `+ ${cookiesperClick}`;
+  autoClickerCost.textContent = `-${cost}`;
+  myCookiesPerClick.textContent = `+ ${cookiesperClick}`;
   setGameState();
 }, 10);
 

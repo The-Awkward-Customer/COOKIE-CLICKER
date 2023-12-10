@@ -14,6 +14,7 @@
   --ghost-btn-bg-hover: #00000014;
   --upgrade-btn-padding: 12px 20px 12px 12px;
   --upgrade-btn-shadow: 0px 4px 8px 0px rgba(250, 162, 0, 0.4);
+  --upgrade-btn-shadow-hover: 0px 4px 12px 0px rgba(250, 162, 0, 0.6);
 
   /* raduis */
   --radius-round: 999px;
@@ -105,8 +106,10 @@ body {
 /* upgrade Button */
 .UpgradeButton {
   display: flex;
+  position: relative;
   flex-flow: row nowrap;
   justify-content: flex-start;
+  align-items: center;
   text-align: left;
   gap: 4px;
   padding: var(--upgrade-btn-padding);
@@ -114,6 +117,8 @@ body {
   border: none;
   background-color: var(--white);
   box-shadow: var(--upgrade-btn-shadow);
+  transition: transform 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 .UpgradeButton img {
@@ -138,18 +143,23 @@ body {
 .UpgradeButton .badge {
   display: flex;
   position: absolute;
-  padding-right: 5px;
+  top: -10px;
+  right: -5px;
   background-color: var(--bg-strongYellow);
-  border: var(--white);
+  border: 2px var(--white) solid;
   border-radius: var(--radius-round);
   padding: var(--badge-padding);
   color: var(--fg-onyellow);
+  text-align: right;
 }
 
 .UpgradeButton:hover {
+  box-shadow: var(--upgrade-btn-shadow-hover);
+  transform: scale(1.05);
 }
 
 .UpgradeButton:active {
+  transform: scale(0.95);
 }
 
 /* stats */
