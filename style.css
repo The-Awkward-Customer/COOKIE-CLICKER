@@ -225,7 +225,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
-  background-image: url("/assets/monsterparts/Full.png");
+  background-image: url("./assets/monsterparts/Full.png");
   background-position: center center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: contain; /* Resize the background image to cover the entire container */
