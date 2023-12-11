@@ -86,7 +86,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  scale: 2;
+  scale: 1.5;
   transition: transform 0.15s
     cubic-bezier(
       var(--bezier-cp1-x),
@@ -162,6 +162,27 @@ body {
   transform: scale(0.95);
 }
 
+/* particles
+.particle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.3s;
+} */
+
+/* .particleContainer {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(230, 230, 250, 0.121);
+}
+.particleContainer p {
+  width: 20px;
+  height: 20px;
+  /* transition: opacity 0.3s; */
+/* color: #413633;
+  font-size: 200px;
+} */
+
 /* stats */
 .statWrapper {
   display: flex;
@@ -204,6 +225,10 @@ body {
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
+  background-image: url(./assets/monsterparts/Full.png);
+  background-position: center center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain; /* Resize the background image to cover the entire container */
 }
 .buttonWrapper {
   display: flex;

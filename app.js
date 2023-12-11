@@ -79,6 +79,7 @@ const myCookieButton = document.getElementById("myCookieButton");
 myCookieButton.addEventListener("click", function () {
   let sum = cookiesValue + cookiesperClick;
   cookiesValue = sum;
+  emitParticles();
 });
 
 // function to log time played
@@ -113,6 +114,41 @@ myResetButton.addEventListener("click", function () {
   cookiesperClick = 1;
   cost = 10;
 });
+
+// particles
+
+// function emitParticles() {
+//   const container = document.getElementById("particleContainer");
+//   console.log("called");
+//   for (let i = 0; i < 10; i++) {
+//     // Emit 10 particles
+//     const particle = document.createElement("img");
+//     particle.src = "./assets/particles/particle1.svg"; // Path to your SVG
+//     particle.classList.add("particle");
+//     const p = document.createElement("p");
+//     p.textContent = "I'm a p tag";
+
+//     console.log(particle);
+
+//     // Random position - adjust as necessary
+//     const x = Math.random() * window.innerWidth;
+//     const y = Math.random() * window.innerHeight;
+
+//     particle.style.left = x + "px";
+//     particle.style.top = y + "px";
+//     // p.style.left = x + "px";
+//     // p.style.top = y + "px";
+
+//     container.appendChild(particle);
+//     container.appendChild(p);
+
+//     // Optional: Remove particle after animation
+//     setTimeout(() => {
+//       container.removeChild(particle);
+//       container.removeChild(p);
+//     }, 3000); // Adjust time to match your animation
+//   }
+// }
 
 // loads the game state
 playTimeCounter();
